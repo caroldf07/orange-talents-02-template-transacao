@@ -73,6 +73,10 @@
             <artifactId>spring-cloud-starter-stream-kafka</artifactId>
             <version>3.0.7.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
