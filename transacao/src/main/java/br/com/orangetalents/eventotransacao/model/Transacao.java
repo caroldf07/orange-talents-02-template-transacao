@@ -1,12 +1,10 @@
 package br.com.orangetalents.eventotransacao.model;
 
+import br.com.orangetalents.consultatransacao.view.TransacaoResponse;
 import br.com.orangetalents.eventotransacao.view.CartaoEvento;
 import br.com.orangetalents.eventotransacao.view.EstabelecimentoEvento;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -19,7 +17,7 @@ public class Transacao {
     private BigDecimal valor;
     @Embedded
     private Estabelecimento estabelecimento;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Cartao cartao;
     private LocalDateTime efetivadaEm;
 
@@ -50,5 +48,29 @@ public class Transacao {
     @Override
     public int hashCode() {
         return Objects.hash(id, valor, estabelecimento, cartao, efetivadaEm);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public Estabelecimento getEstabelecimento() {
+        return estabelecimento;
+    }
+
+    public Cartao getCartao() {
+        return cartao;
+    }
+
+    public LocalDateTime getEfetivadaEm() {
+        return efetivadaEm;
+    }
+
+    public TransacaoResponse fromModelToResponse() {
+        return new TransacaoResponse(this.valor, this.estabelecimento, this.cartao, this.efetivadaEm);
     }
 }

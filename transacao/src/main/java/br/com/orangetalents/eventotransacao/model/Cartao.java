@@ -1,33 +1,41 @@
 package br.com.orangetalents.eventotransacao.model;
 
+import br.com.orangetalents.eventotransacao.view.CartaoResponse;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Cartao {
 
     @Id
-    private String id;
+    private String numeroCartao;
     @Email
     private String email;
 
-    @OneToMany(mappedBy = "cartao")
-    private Set<Transacao> transacoes = new HashSet<>();
-
     public Cartao(String id, @Email String email) {
-        this.id = id;
+        this.numeroCartao = id;
         this.email = email;
     }
 
-    public String getId() {
-        return id;
+    /*
+     * Criado por conta do Hibernate
+     * */
+    @Deprecated
+    public Cartao() {
+    }
+
+    public String getNumeroCartao() {
+        return numeroCartao;
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public CartaoResponse fromModelToResponse() {
+
+        return new CartaoResponse(this.numeroCartao, this.email);
     }
 }
