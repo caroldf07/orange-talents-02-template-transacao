@@ -1,6 +1,6 @@
 version = 1
 
-test_patterns = ["t**/est/**"]
+test_patterns = ["**/test/**"]
 
 [[analyzers]]
 name = "test-coverage"
